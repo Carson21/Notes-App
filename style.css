@@ -1,0 +1,41 @@
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+}
+
+#wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+#notes {
+  width: 25%;
+  height: 100%;
+  background-color: #f9f9f9;
+}
+
+#main {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#ribbon {
+  width: 100%;
+  height: 3rem;
+  background-color: aquamarine;
+}
+
+#note {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0.5rem;
+  outline: 0px solid transparent;
+}
