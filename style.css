@@ -12,10 +12,64 @@ body {
   flex-direction: row;
 }
 
-#notes {
+#menu {
   width: 25%;
   height: 100%;
   background-color: #f9f9f9;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#title-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+  padding-top: .6rem;
+}
+
+#title {
+  margin: .5rem;
+}
+
+#new-note {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+#line {
+  width: 75%;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+#notes {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.note {
+  background-color: aqua;
+  height: 4rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.active {
+  background-color: #ffffff;
+}
+
+.note-title {
+  box-sizing: border-box;
+  padding: 1.5rem;
 }
 
 #main {
@@ -29,6 +83,16 @@ body {
   width: 100%;
   height: 3rem;
   background-color: aquamarine;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 1rem;
+  box-sizing: border-box;
+}
+
+#save {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 #note {
