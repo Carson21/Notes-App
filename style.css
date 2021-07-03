@@ -30,11 +30,11 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 70%;
-  padding-top: .6rem;
+  padding-top: 0.6rem;
 }
 
 #title {
-  margin: .5rem;
+  margin: 0.5rem;
 }
 
 #new-note {
