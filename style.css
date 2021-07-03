@@ -95,6 +95,11 @@ body {
   height: 1.5rem;
 }
 
+#delete {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 #note {
   box-sizing: border-box;
   height: 100%;

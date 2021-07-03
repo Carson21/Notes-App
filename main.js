@@ -1,12 +1,25 @@
-const save = document.querySelector("#save")
+const saveIcon = document.querySelector("#save")
+const deleteIcon = document.querySelector("#delete")
 const newNote = document.querySelector("#new-note")
 const notesElement = document.querySelector("#notes")
 const noteArea = document.querySelector("#note")
 
-const saveCurrentNote = () => {}
+const saveCurrentNote = () => {
+  if (notes.length !== 0) {
+    notes.splice(getIndexOfNote(), 1)
+    currentNote.content = noteArea.innerHTML
+    notes.unshift(currentNote)
+    localStorage.setItem("notes", JSON.stringify(notes))
+    renderNotes()
+    getCurrentNoteElement().classList.add("active")
+  }
+}
 
 const renderNotes = () => {
   notesElement.innerHTML = null
+  while (notesElement.firstChild) {
+    notesElement.removeChild(notesElement.lastChild)
+  }
   for (note of notes) {
     let root = document.createElement("div")
     let title = document.createElement("h4")
@@ -25,16 +38,31 @@ const noteClicked = (e) => {
 }
 
 const changeActive = (elem) => {
-  getCurrentNoteElement().classList.remove("active")
+  if (currentNote !== null) {
+    getCurrentNoteElement().classList.remove("active")
+  }
   setCurrentNote(elem.id)
   getCurrentNoteElement().classList.add("active")
   noteArea.innerHTML = currentNote.content
 }
 
-const deleteNote = () => {}
+const deleteNote = () => {
+  if (notes.length !== 0) {
+    if (confirm("Are you sure you want to delete this note?")) {
+      notes.splice(getIndexOfNote(), 1)
+      currentNote = null
+      noteArea.innerHTML = null
+      localStorage.setItem("notes", JSON.stringify(notes))
+      renderNotes()
+    }
+  }
+}
 
 const createNote = () => {
   let name = prompt("Note Name?")
+  if (name === "" || name === null) {
+    return
+  }
   updateCount()
   notes.unshift({ id: `n-${count}`, name: name, content: null })
   currentNote = notes[0]
@@ -47,6 +75,14 @@ const setCurrentNote = (id) => {
   for (note of notes) {
     if (note.id === id) {
       currentNote = note
+    }
+  }
+}
+
+const getIndexOfNote = () => {
+  for (index of notes.keys()) {
+    if (notes[index].id === currentNote.id) {
+      return index
     }
   }
 }
@@ -86,7 +122,10 @@ let notes = getNotes()
 let currentNote = notes[0]
 let count = getCount()
 renderNotes()
-changeActive(getCurrentNoteElement())
+if (currentNote !== undefined) {
+  changeActive(getCurrentNoteElement())
+}
 
-save.addEventListener("click", saveCurrentNote)
+saveIcon.addEventListener("click", saveCurrentNote)
+deleteIcon.addEventListener("click", deleteNote)
 newNote.addEventListener("click", createNote)
