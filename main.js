@@ -3,6 +3,7 @@ const deleteIcon = document.querySelector("#delete")
 const newNote = document.querySelector("#new-note")
 const notesElement = document.querySelector("#notes")
 const noteArea = document.querySelector("#note")
+const menu = document.querySelector("#menu")
 
 const saveCurrentNote = () => {
   if (notes.length !== 0) {
@@ -34,7 +35,16 @@ const renderNotes = () => {
 }
 
 const noteClicked = (e) => {
+  e.stopPropagation()
   changeActive(e.currentTarget)
+}
+
+const handleMainClick = () => {
+  if (currentNote !== null || currentNote !== undefined) {
+    getCurrentNoteElement().classList.remove("active")
+    currentNote = null
+    noteArea.innerHTML = null
+  }
 }
 
 const changeActive = (elem) => {
@@ -58,7 +68,7 @@ const deleteNote = () => {
   }
 }
 
-const createNote = () => {
+const createNote = (e) => {
   let name = prompt("Note Name?")
   if (name === "" || name === null) {
     return
@@ -129,3 +139,4 @@ if (currentNote !== undefined) {
 saveIcon.addEventListener("click", saveCurrentNote)
 deleteIcon.addEventListener("click", deleteNote)
 newNote.addEventListener("click", createNote)
+menu.addEventListener("click", handleMainClick)
