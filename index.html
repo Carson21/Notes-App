@@ -20,8 +20,19 @@
       </div>
       <div id="main">
         <div id="ribbon">
-          <i id="save" class="fas fa-save fa-lg"></i>
-          <i id="delete" class="fas fa-trash fa-lg"></i>
+          <div id="commands" class="options">
+            <i class="fas fa-bold fa-lg" data-command="bold"></i>
+            <i class="fas fa-italic fa-lg" data-command="italic"></i>
+            <i class="fas fa-underline fa-lg" data-command="underline"></i>
+            <input id="color-picker" type="color" />
+            <i class="fas fa-align-left fa-lg" data-command="justifyLeft"></i>
+            <i class="fas fa-align-center fa-lg" data-command="justifyCenter"></i>
+            <i class="fas fa-align-right fa-lg" data-command="justifyRight"></i>
+          </div>
+          <div class="options">
+            <i id="save" class="fas fa-save fa-lg"></i>
+            <i id="delete" class="fas fa-trash fa-lg"></i>
+          </div>
         </div>
         <div id="note" contenteditable="true"></div>
       </div>

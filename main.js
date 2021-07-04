@@ -4,6 +4,8 @@ const newNote = document.querySelector("#new-note")
 const notesElement = document.querySelector("#notes")
 const noteArea = document.querySelector("#note")
 const menu = document.querySelector("#menu")
+const colorPicker = document.querySelector("#color-picker")
+const commands = document.querySelector("#commands")
 
 const saveCurrentNote = () => {
   if (notes.length !== 0) {
@@ -46,7 +48,7 @@ const noteClicked = (e) => {
 }
 
 const handleMainClick = () => {
-  if (currentNote !== null || currentNote !== undefined) {
+  if (currentNote !== null && currentNote !== undefined) {
     getCurrentNoteElement().classList.remove("active")
     currentNote = null
     noteArea.innerHTML = null
@@ -54,7 +56,7 @@ const handleMainClick = () => {
 }
 
 const changeActive = (elem) => {
-  if (currentNote !== null) {
+  if (currentNote !== null && currentNote !== undefined) {
     getCurrentNoteElement().classList.remove("active")
   }
   setCurrentNote(elem.id)
@@ -75,6 +77,7 @@ const deleteNote = () => {
 }
 
 const createNote = (e) => {
+  e.stopPropagation()
   let name = prompt("Note Name?")
   if (name === "" || name === null) {
     return
@@ -145,4 +148,16 @@ if (currentNote !== undefined) {
 saveIcon.addEventListener("click", saveCurrentNote)
 deleteIcon.addEventListener("click", deleteNote)
 newNote.addEventListener("click", createNote)
+
+for (option of commands.children) {
+  if (option.nodeName === "INPUT") {
+    option.addEventListener("input", (e) => {
+      document.execCommand("foreColor", false, e.target.value)
+    })
+  }
+  option.addEventListener("click", (e) => {
+    document.execCommand(e.currentTarget.dataset.command, false, "")
+  })
+}
+
 menu.addEventListener("click", handleMainClick)
