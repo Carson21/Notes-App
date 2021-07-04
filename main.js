@@ -21,9 +21,10 @@ const renderNotes = () => {
   while (notesElement.firstChild) {
     notesElement.removeChild(notesElement.lastChild)
   }
-  for (note of notes) {
+  for ([i, note] of notes.entries()) {
     let root = document.createElement("div")
     let title = document.createElement("h4")
+
     root.classList.add("note")
     root.id = note.id
     title.innerHTML = note.name
@@ -31,6 +32,11 @@ const renderNotes = () => {
     root.appendChild(title)
     root.addEventListener("click", noteClicked)
     notesElement.appendChild(root)
+    if (i + 1 !== notes.length) {
+      let hr = document.createElement("hr")
+      hr.classList.add("lines")
+      notesElement.appendChild(hr)
+    }
   }
 }
 

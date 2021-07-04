@@ -15,7 +15,7 @@ body {
 #menu {
   width: 25%;
   height: 100%;
-  background-color: #f9f9f9;
+  background-color: #f6f6f6;
   padding: 0;
   margin: 0;
   display: flex;
@@ -37,15 +37,12 @@ body {
   margin: 0.5rem;
 }
 
-#new-note {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
 #line {
   width: 75%;
   padding: 0;
   margin-bottom: 1rem;
+  border: 2px solid #b5ab8e;
+  border-radius: 5px;
 }
 
 #notes {
@@ -55,21 +52,31 @@ body {
 }
 
 .note {
-  background-color: aqua;
+  background-color: #28c5d9;
+  align-self: center;
+  border-radius: 6px;
   height: 4rem;
-  width: 100%;
+  width: 85%;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
 .active {
-  background-color: #ffffff;
+  background-color: #07b4c4;
 }
 
 .note-title {
   box-sizing: border-box;
   padding: 1.5rem;
+  font-size: 1.3rem;
+  color: #fafafa;
+}
+
+.lines {
+  width: 75%;
+  border: 1px solid #b5ab8e;
+  border-radius: 5px;
 }
 
 #main {
@@ -82,22 +89,12 @@ body {
 #ribbon {
   width: 100%;
   height: 3rem;
-  background-color: aquamarine;
+  background-color: #2ee8bb;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding-left: 1rem;
   box-sizing: border-box;
-}
-
-#save {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-#delete {
-  width: 1.5rem;
-  height: 1.5rem;
 }
 
 #note {
