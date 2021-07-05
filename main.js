@@ -156,7 +156,7 @@ for (option of commands.children) {
     })
   }
   option.addEventListener("click", (e) => {
-    document.execCommand(e.currentTarget.dataset.command, false, "")
+    document.execCommand(e.currentTarget.dataset.command, true, null)
   })
 }
 
