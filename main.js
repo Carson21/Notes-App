@@ -1,3 +1,6 @@
+// main.js
+
+// Getting all of the elements needed
 const deleteIcon = document.querySelector("#delete")
 const newNote = document.querySelector("#new-note")
 const notesElement = document.querySelector("#notes")
@@ -7,6 +10,7 @@ const colorPicker = document.querySelector("#color-picker")
 const commands = document.querySelector("#commands")
 const fontSelect = document.querySelector("select")
 
+// A function to save the current note
 const saveCurrentNote = () => {
   if (notes.length !== 0) {
     notes.splice(getIndexOfNote(), 1)
@@ -18,6 +22,7 @@ const saveCurrentNote = () => {
   }
 }
 
+// renders all the elements on the left side of the page where you click which note you want
 const renderNotes = () => {
   notesElement.innerHTML = null
   while (notesElement.firstChild) {
@@ -42,11 +47,13 @@ const renderNotes = () => {
   }
 }
 
+// Is fired after a note is clicked
 const noteClicked = (e) => {
   e.stopPropagation()
   changeActive(e.currentTarget)
 }
 
+// When the main menu on the left side is clicked, this is fired
 const handleMainClick = () => {
   if (currentNote !== null && currentNote !== undefined) {
     getCurrentNoteElement().classList.remove("active")
@@ -57,12 +64,14 @@ const handleMainClick = () => {
   }
 }
 
+// Whenever the selection changes on the contenteditable div, the font size selection sets itself to the current fontsize of that text
 const changeFontSelection = () => {
   if (document.activeElement === noteArea) {
     fontSelect.value = document.queryCommandValue("FontSize")
   }
 }
 
+// A function to change the active note
 const changeActive = (elem) => {
   if (currentNote !== null && currentNote !== undefined) {
     getCurrentNoteElement().classList.remove("active")
@@ -73,6 +82,7 @@ const changeActive = (elem) => {
   noteArea.innerHTML = currentNote.content
 }
 
+// A function to delete a note
 const deleteNote = () => {
   if (notes.length !== 0) {
     if (confirm("Are you sure you want to delete this note?")) {
@@ -85,6 +95,7 @@ const deleteNote = () => {
   }
 }
 
+// A function to create a note
 const createNote = (e) => {
   e.stopPropagation()
   let name = prompt("Note Name?")
@@ -99,6 +110,7 @@ const createNote = (e) => {
   changeActive(getCurrentNoteElement())
 }
 
+// Sets the current note from an id
 const setCurrentNote = (id) => {
   for (note of notes) {
     if (note.id === id) {
@@ -107,6 +119,7 @@ const setCurrentNote = (id) => {
   }
 }
 
+// Gets an index of a note in the notes array based on the current note
 const getIndexOfNote = () => {
   for (index of notes.keys()) {
     if (notes[index].id === currentNote.id) {
@@ -115,6 +128,7 @@ const getIndexOfNote = () => {
   }
 }
 
+// Will get the notes that are saved in LocalStorage
 const getNotes = () => {
   let notes = JSON.parse(localStorage.getItem("notes"))
   if (notes === null) {
@@ -125,6 +139,7 @@ const getNotes = () => {
   }
 }
 
+// Gets the count from LocalStorage used to create the ids for the notes
 const getCount = () => {
   let localCount = JSON.parse(localStorage.getItem("count"))
   if (localCount === null) {
@@ -135,6 +150,7 @@ const getCount = () => {
   }
 }
 
+// Updates the count used to id the notes
 const updateCount = () => {
   count++
   localStorage.setItem("count", count)
@@ -154,12 +170,14 @@ if (currentNote !== undefined) {
   changeActive(getCurrentNoteElement())
 }
 
+// Adding event listeners
 deleteIcon.addEventListener("click", deleteNote)
 newNote.addEventListener("click", createNote)
 noteArea.addEventListener("input", saveCurrentNote)
 document.addEventListener("selectionchange", changeFontSelection)
 menu.addEventListener("click", handleMainClick)
 
+// For loop adds event listeners to react to clicks of the rich text editor buttons
 for (option of commands.children) {
   if (option.nodeName === "INPUT") {
     option.addEventListener("input", (e) => {
