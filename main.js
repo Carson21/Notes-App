@@ -78,6 +78,7 @@ const changeActive = (elem) => {
   }
   setCurrentNote(elem.id)
   getCurrentNoteElement().classList.add("active")
+  fontSelect.value = 3
   noteArea.setAttribute("contenteditable", "true")
   noteArea.innerHTML = currentNote.content
 }
@@ -88,7 +89,9 @@ const deleteNote = () => {
     if (confirm("Are you sure you want to delete this note?")) {
       notes.splice(getIndexOfNote(), 1)
       currentNote = null
+      fontSelect.value = 3
       noteArea.innerHTML = null
+      noteArea.setAttribute("contenteditable", "false")
       localStorage.setItem("notes", JSON.stringify(notes))
       renderNotes()
     }
