@@ -1,4 +1,3 @@
-const saveIcon = document.querySelector("#save")
 const deleteIcon = document.querySelector("#delete")
 const newNote = document.querySelector("#new-note")
 const notesElement = document.querySelector("#notes")
@@ -6,6 +5,7 @@ const noteArea = document.querySelector("#note")
 const menu = document.querySelector("#menu")
 const colorPicker = document.querySelector("#color-picker")
 const commands = document.querySelector("#commands")
+const fontSelect = document.querySelector("select")
 
 const saveCurrentNote = () => {
   if (notes.length !== 0) {
@@ -51,7 +51,15 @@ const handleMainClick = () => {
   if (currentNote !== null && currentNote !== undefined) {
     getCurrentNoteElement().classList.remove("active")
     currentNote = null
+    fontSelect.value = 3
     noteArea.innerHTML = null
+    noteArea.setAttribute("contenteditable", "false")
+  }
+}
+
+const changeFontSelection = () => {
+  if (document.activeElement === noteArea) {
+    fontSelect.value = document.queryCommandValue("FontSize")
   }
 }
 
@@ -61,6 +69,7 @@ const changeActive = (elem) => {
   }
   setCurrentNote(elem.id)
   getCurrentNoteElement().classList.add("active")
+  noteArea.setAttribute("contenteditable", "true")
   noteArea.innerHTML = currentNote.content
 }
 
@@ -145,19 +154,40 @@ if (currentNote !== undefined) {
   changeActive(getCurrentNoteElement())
 }
 
-saveIcon.addEventListener("click", saveCurrentNote)
 deleteIcon.addEventListener("click", deleteNote)
 newNote.addEventListener("click", createNote)
+noteArea.addEventListener("input", saveCurrentNote)
+document.addEventListener("selectionchange", changeFontSelection)
+menu.addEventListener("click", handleMainClick)
 
 for (option of commands.children) {
   if (option.nodeName === "INPUT") {
     option.addEventListener("input", (e) => {
       document.execCommand("foreColor", false, e.target.value)
     })
+    continue
+  } else if (option.nodeName === "SELECT") {
+    option.addEventListener("input", (e) => {
+      document.execCommand("fontSize", false, e.target.value)
+    })
+  } else if (option.dataset.command === "insertImage") {
+    option.addEventListener("click", () => {
+      let link = prompt("What is the url of the image?", "https://")
+      if (link !== null && link !== "") {
+        document.execCommand("insertImage", false, link)
+      }
+    })
+    continue
+  } else if (option.dataset.command === "insertLink") {
+    option.addEventListener("click", () => {
+      let link = prompt("What is the link?", "https://")
+      if (link !== null && link !== "") {
+        document.execCommand("createLink", false, link)
+      }
+    })
+    continue
   }
   option.addEventListener("click", (e) => {
     document.execCommand(e.currentTarget.dataset.command, true, null)
   })
 }
-
-menu.addEventListener("click", handleMainClick)

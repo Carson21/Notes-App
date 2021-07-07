@@ -20,7 +20,17 @@
       </div>
       <div id="main">
         <div id="ribbon">
-          <div id="commands" class="options">
+          <div id="commands">
+            <span>Font Size:</span>
+            <select name="fontsize">
+              <option value="1">XXS</option>
+              <option value="2">XS</option>
+              <option selected value="3">S</option>
+              <option value="4">M</option>
+              <option value="5">L</option>
+              <option value="6">XL</option>
+              <option value="7">XXL</option>
+            </select>
             <button data-command="bold">
               <i class="fas fa-bold fa-lg"></i>
             </button>
@@ -29,6 +39,18 @@
             </button>
             <button data-command="underline">
               <i class="fas fa-underline fa-lg"></i>
+            </button>
+            <button data-command="insertOrderedList">
+              <i class="fas fa-list fa-lg"></i>
+            </button>
+            <button data-command="insertUnorderedList">
+              <i class="fas fa-list-ul fa-lg"></i>
+            </button>
+            <button data-command="insertImage">
+              <i class="fas fa-image fa-lg"></i>
+            </button>
+            <button data-command="insertLink">
+              <i class="fas fa-link fa-lg"></i>
             </button>
             <input id="color-picker" type="color" />
             <button data-command="justifyLeft">
@@ -42,11 +64,10 @@
             </button>
           </div>
           <div class="options">
-            <i id="save" class="fas fa-save fa-lg"></i>
             <i id="delete" class="fas fa-trash fa-lg"></i>
           </div>
         </div>
-        <div id="note" contenteditable="true"></div>
+        <div id="note" contenteditable="false"></div>
       </div>
     </div>
     <script type="text/javascript" src="./main.js"></script>

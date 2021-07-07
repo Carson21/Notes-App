@@ -105,8 +105,8 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding-left: 1rem;
   box-sizing: border-box;
+  padding-left: 10px;
 }
 
 button {
@@ -124,13 +124,21 @@ button > i {
   margin: 0 4px;
 }
 
+span {
+  font-weight: 600;
+}
+
 #color-picker {
   cursor: pointer;
 }
 
-.options {
-  margin: 0 2%;
+#commands {
+  margin: 0 4px;
   cursor: pointer;
+}
+
+#delete {
+  margin-right: 10px;
 }
 
 #note {
